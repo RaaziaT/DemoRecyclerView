@@ -4,48 +4,43 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import java.lang.ref.Reference;
+import android.util.Log;
 import java.util.ArrayList;
 
-public class ListActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    HorizontalPresenter horizontalPresenter ;
-    VerticalPresenter verticalPresenter;
-    private ArrayList<Object> objects = new ArrayList<>();
+public class ListActivity extends AppCompatActivity implements ListContract.MainView {
 
+    @BindView(R.id.recycler_View)
+    RecyclerView recyclerView;
+    ListPresenter listPresenter;
+    MainAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        RecyclerView recyclerView = findViewById(R.id.recycler_View);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        MainAdapter adapter = new MainAdapter(this, getObject());
+        ButterKnife.bind(this);
+        listPresenter= new ListPresenter(this);
+    }
+    @Override
+    public void setRecyclerView() {
+
+        if(listPresenter.getObject()==null)
+            Log.i("MainView",listPresenter.getObject().toString());
+        else {
+            Log.i("MainView",listPresenter.getObject().toString());
+
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter= new MainAdapter(this, listPresenter.getObject());
         recyclerView.setAdapter(adapter);
+        }
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        setRecyclerView();
     }
 
-    private ArrayList<Object> getObject() {
-        objects.add(getVerticalData().get(0));
-        objects.add(getHorizontalData().get(0));
-        return objects;
-    }
-
-    public static ArrayList<HorizontalModel>  getHorizontalData() {
-        ArrayList<HorizontalModel> horizontalModels= new ArrayList<>();
-        horizontalModels.add(new HorizontalModel(R.mipmap.ic_launcher,"A","B","C"));
-        horizontalModels.add(new HorizontalModel(R.mipmap.ic_launcher,"D","E","F"));
-        return horizontalModels;
-    }
-    public static ArrayList<VerticalModel> getVerticalData(){
-        ArrayList<VerticalModel> verticalModels=new ArrayList<>();
-        verticalModels.add(new VerticalModel("I","J",R.mipmap.ic_launcher));
-        verticalModels.add(new VerticalModel("K","L",R.mipmap.ic_launcher));
-        return  verticalModels;
-    }
-
-//    @Override
-//    public void setData() {
-//        horizontalPresenter =new HorizontalPresenter(getHorizontalData());
-//        verticalPresenter= new VerticalPresenter(getVerticalData());
-//    }
 }

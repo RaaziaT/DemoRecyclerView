@@ -32,7 +32,6 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Ho
         public HorizontalViewHolder(View v){
             super(v);
             ButterKnife.bind(this,v);
-
         }
         @Override
         public void setImage(int image) {

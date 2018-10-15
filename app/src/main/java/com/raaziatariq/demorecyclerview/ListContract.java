@@ -14,6 +14,7 @@ public interface ListContract {
             void setPublishedDate(String publishedDate);
     }
     interface HorizontalRowPresenter{
+        ArrayList<HorizontalModel>  getHorizontalData();
         void onBindHorizontalRowViewAtPosition(int position, HorizontalRowView horizontalRowView);
         int getHorizontalRowsCount();
     }
@@ -23,11 +24,14 @@ public interface ListContract {
         void setSubHeader(String subHeader);
     }
     interface VerticalRowPresenter{
+        ArrayList<VerticalModel> getVerticalData();
         void onBindVerticalRowViewAtPosition(int position, VerticalRowView verticalRowView);
         int getVerticalRowsCount();
     }
-//    interface MainView{
-//        ArrayList<HorizontalModel> getHorizontalData();
-//        ArrayList<VerticalModel> getVerticalData();
-//    }
+    interface MainView{
+        void setRecyclerView();
+    }
+    interface MainPresenter{
+        ArrayList<Object> getObject();
+    }
 }
