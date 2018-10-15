@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import static com.raaziatariq.demorecyclerview.ListActivity.getHorizontalData;
-import static com.raaziatariq.demorecyclerview.ListActivity.getVerticalData;
+//import static com.raaziatariq.demorecyclerview.ListActivity.getHorizontalData;
+//import static com.raaziatariq.demorecyclerview.ListActivity.getVerticalData;
 
 /**
  * Created by Raazia Tariq on 10/11/2018.
@@ -85,10 +85,10 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0)
-            return HORIZONTAL;
-        if (position == 1)
+        if (items.get(position) instanceof HorizontalModel)
             return VERTICAL;
+        if (items.get(position) instanceof VerticalModel)
+            return HORIZONTAL;
         return -1;
     }
 

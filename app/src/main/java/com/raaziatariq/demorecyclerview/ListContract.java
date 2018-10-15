@@ -1,5 +1,7 @@
 package com.raaziatariq.demorecyclerview;
 
+import java.util.ArrayList;
+
 /**
  * Created by Raazia Tariq on 10/11/2018.
  */
@@ -24,4 +26,8 @@ public interface ListContract {
         void onBindVerticalRowViewAtPosition(int position, VerticalRowView verticalRowView);
         int getVerticalRowsCount();
     }
+//    interface MainView{
+//        ArrayList<HorizontalModel> getHorizontalData();
+//        ArrayList<VerticalModel> getVerticalData();
+//    }
 }

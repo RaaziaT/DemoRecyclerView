@@ -16,13 +16,15 @@ import butterknife.ButterKnife;
 
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.VerticalViewHolder> {
 
-     VerticalPresenter verticalPresenter;
+    private final VerticalPresenter verticalPresenter ;
 
     public VerticalAdapter(VerticalPresenter verticalPresenter){
+        verticalPresenter=new VerticalPresenter();
         this.verticalPresenter=verticalPresenter;
     }
     @Override
     public VerticalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//        verticalPresenter = new VerticalPresenter();
         return new VerticalViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.vertical_row, parent, false));
     }
@@ -34,7 +36,9 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Vertic
 
     @Override
     public int getItemCount() {
-        return verticalPresenter.getVerticalRowsCount();
+ //       if(verticalPresenter.getVerticalRowsCount()!=0)
+            return verticalPresenter.getVerticalRowsCount();
+   //     else return 2;
     }
 
     public class VerticalViewHolder extends RecyclerView.ViewHolder implements ListContract.VerticalRowView {

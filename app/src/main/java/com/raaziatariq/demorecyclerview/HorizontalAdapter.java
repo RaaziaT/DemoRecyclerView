@@ -1,6 +1,7 @@
 package com.raaziatariq.demorecyclerview;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
@@ -17,20 +18,21 @@ import butterknife.ButterKnife;
 
 public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.HorizontalViewHolder> {
 
-     HorizontalPresenter horizontalPresenter = new HorizontalPresenter();
-    public class HorizontalViewHolder extends RecyclerView.ViewHolder implements ListContract.HorizontalRowView{
+    private final  HorizontalPresenter horizontalPresenter;
+    public class  HorizontalViewHolder extends RecyclerView.ViewHolder implements ListContract.HorizontalRowView{
 
-        @BindView(R.id.showTitle)
+        @BindView(R.id.title)
         TextView txtView_title;
         @BindView(R.id.description)
         TextView txtView_description;
         @BindView(R.id.published_date)
-        TextView txtView_publisheddate;
+        TextView txtView_published_date;
         @BindView(R.id.image_view)
         ImageView imageView;
         public HorizontalViewHolder(View v){
             super(v);
             ButterKnife.bind(this,v);
+
         }
         @Override
         public void setImage(int image) {
@@ -49,15 +51,18 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Ho
 
         @Override
         public void setPublishedDate(String publishedDate) {
-                txtView_publisheddate.setText(publishedDate);
+                txtView_published_date.setText(publishedDate);
         }
     }
     public HorizontalAdapter(HorizontalPresenter horizontalRowPresenter)
     {
+        horizontalRowPresenter=new HorizontalPresenter();
         this.horizontalPresenter=horizontalRowPresenter;
+
     }
     @Override
-    public HorizontalAdapter.HorizontalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HorizontalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//       horizontalPresenter= new HorizontalPresenter();
         return new HorizontalViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.horizontal_row, parent, false));
     }
@@ -69,6 +74,9 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.Ho
 
     @Override
     public int getItemCount() {
-       return horizontalPresenter.getHorizontalRowsCount();
+//        Log.i("Model Size","Size="+horizontalPresenter.getHorizontalRowsCount());
+    //  horizontalPresenter.getHorizontalRowsCount()!=0
+      return horizontalPresenter.getHorizontalRowsCount();
+//        else return 2;
     }
 }

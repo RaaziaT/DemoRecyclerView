@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
 
+    HorizontalPresenter horizontalPresenter ;
+    VerticalPresenter verticalPresenter;
     private ArrayList<Object> objects = new ArrayList<>();
 
     @Override
@@ -17,10 +19,9 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         RecyclerView recyclerView = findViewById(R.id.recycler_View);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         MainAdapter adapter = new MainAdapter(this, getObject());
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
     private ArrayList<Object> getObject() {
@@ -29,16 +30,22 @@ public class ListActivity extends AppCompatActivity {
         return objects;
     }
 
-    public static ArrayList<HorizontalModel> getVerticalData() {
+    public static ArrayList<HorizontalModel>  getHorizontalData() {
         ArrayList<HorizontalModel> horizontalModels= new ArrayList<>();
         horizontalModels.add(new HorizontalModel(R.mipmap.ic_launcher,"A","B","C"));
         horizontalModels.add(new HorizontalModel(R.mipmap.ic_launcher,"D","E","F"));
         return horizontalModels;
     }
-    public static ArrayList<VerticalModel> getHorizontalData(){
+    public static ArrayList<VerticalModel> getVerticalData(){
         ArrayList<VerticalModel> verticalModels=new ArrayList<>();
         verticalModels.add(new VerticalModel("I","J",R.mipmap.ic_launcher));
         verticalModels.add(new VerticalModel("K","L",R.mipmap.ic_launcher));
         return  verticalModels;
     }
+
+//    @Override
+//    public void setData() {
+//        horizontalPresenter =new HorizontalPresenter(getHorizontalData());
+//        verticalPresenter= new VerticalPresenter(getVerticalData());
+//    }
 }
